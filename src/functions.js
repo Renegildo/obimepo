@@ -1,4 +1,5 @@
-const parseQuestionInput = (input) => {
+const inputToImageUrl = (input) => {
+    const imageUrlBase = 'https://renegildo.github.io/obmep-questions/questions/';
     const base = input.replace(/-/g, '');
 
     const fMatch = base.match(/f(\d)/i);
@@ -11,7 +12,8 @@ const parseQuestionInput = (input) => {
     if (!qMatch) throw new Error('ERRO: Falta a questão.');
     if (!yMatch) throw new Error('ERRO: Falta o ano.');
 
-    return `f${fMatch[1]}n${nMatch[1]}-${yMatch[1]}q${qMatch[1]}.png`;
+    const result = imageUrlBase + `${yMatch[1]}n${nMatch[1]}f${fMatch[1]}q${qMatch[1]}.png`;
+    return result;
 };
 
 const isValidQuestion = (input) => {
@@ -43,7 +45,7 @@ function parseQuestion(str) {
 
 
 export {
-    parseQuestionInput,
+    inputToImageUrl,
     isValidQuestion,
     parseQuestion,
 };

@@ -1,7 +1,5 @@
-import { SlashCommandBuilder, AttachmentBuilder } from 'discord.js';
-import { parseQuestionInput } from '../../functions.js';
-import { join } from 'path';
-import { existsSync } from 'fs';
+import { SlashCommandBuilder, AttachmentBuilder, EmbedBuilder } from 'discord.js';
+import { inputToImageUrl } from '../../functions.js';
 
 export const data = new SlashCommandBuilder()
     .setName('get')
@@ -13,23 +11,17 @@ export const data = new SlashCommandBuilder()
     });
 export async function execute(interaction) {
     const input = interaction.options.getString('input');
-    let pngFileName;
+
+    let imageUrl;
     try {
-        pngFileName = parseQuestionInput(input);
+        imageUrl = inputToImageUrl(input);
     } catch (error) {
-        console.error(error);
         return await interaction.reply({ content: error.message });
     }
 
-    const filePath = join(__dirname, '../../../data/questions', pngFileName);
-
-    if (!existsSync(filePath)) {
-        return await interaction.reply({
-            content: 'Questão não encontrada. Verifique os dados e tente novamente.',
-        });
-    }
-
-    const attachment = new AttachmentBuilder(filePath);
+    const attachment = new AttachmentBuilder()
+        .setName('question.png')
+        .setFile(imageUrl);
 
     await interaction.reply({ files: [attachment] });
 }
