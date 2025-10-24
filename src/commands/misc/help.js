@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js';
 
-export const data = new SlashCommandBuilder().setName('ping').setDescription('Replies with Pong!');
+export const data = new SlashCommandBuilder().setName('ajuda').setDescription('Obtenha informações sobre o bot.');
 export async function execute(interaction) {
     await interaction.reply({ content: `
         ## Como usar o comando de pegar questões?
