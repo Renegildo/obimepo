@@ -4,7 +4,7 @@ export const data = new SlashCommandBuilder().setName('ajuda').setDescription('O
 export async function execute(interaction) {
     await interaction.reply({ content: `
         ## Como usar o comando de pegar questões?
-        Use \`/get <questão>\`, onde \`<questão>\q representa uma questão da OBMEP.
+        Use \`/get <questão>\`, onde \`<questão>\` representa uma questão da OBMEP.
         O formato deve conter **ano**, **nível (n)**, **fase (f)** e **questão (q)** — sempre começando com o **ano**, mas o restante pode vir em qualquer ordem
 
         ### Exemplos válidos
@@ -21,6 +21,6 @@ export async function execute(interaction) {
         Obs.: Por enquanto, o bot só possui questões da **segunda fase**. Se usar fase 1, o bot retornará coisas sem sentido — isso será corrigido em breve.
 
         ## Classificação de dificuldade
-        Ainda estou trabalhando nessa funcionalidade, mas você já pode avaliar a dificuldade de uma questão com o comando \`/avaliar <questão> <nível-de-dificuldade>\`, onde o nível de dificuldade é um número de 1 a 5.
+        Ainda estou trabalhando nessa funcionalidade, mas você já pode avaliar a dificuldade de uma questão com o comando \`/avaliar <questão> <nível-de-dificuldade>\`, onde o nível de dificuldade é um **número inteiro** de 1 a 5.
     ` });
 }
