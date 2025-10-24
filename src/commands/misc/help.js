@@ -19,5 +19,8 @@ export async function execute(interaction) {
         - \`2023f2q5\` (falta o nível)
 
         Obs.: Por enquanto, o bot só possui questões da **segunda fase**. Se usar fase 1, o bot retornará coisas sem sentido — isso será corrigido em breve.
+
+        ## Classificação de dificuldade
+        Ainda estou trabalhando nessa funcionalidade, mas você já pode avaliar a dificuldade de uma questão com o comando \`/avaliar <questão> <nível-de-dificuldade>\`, onde o nível de dificuldade é um número de 1 a 5.
     ` });
 }
