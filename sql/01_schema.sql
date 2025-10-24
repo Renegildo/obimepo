@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS ratings (
     difficulty INTEGER CHECK (difficulty BETWEEN 1 and 5),
 
     question_phase INT NOT NULL,
-    question_item TEXT NOT NULL,
+    question_level INT NOT NULL,
     question_year INT NOT NULL,
     question_number INT NOT NULL,
-    PRIMARY KEY (user_id, question_item, question_phase, question_year, question_number)
+    PRIMARY KEY (user_id, question_level, question_phase, question_year, question_number)
 );

@@ -1,22 +1,30 @@
-const { REST, Routes } = require('discord.js');
-const fs = require('node:fs');
-const path = require('node:path');
-require('dotenv').config();
+import { REST, Routes } from 'discord.js';
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'node:url';
+import path from 'path';
+dotenv.config();
 
 const token = process.env.BOT_TOKEN;
 const clientId = process.env.CLIENT_ID;
 const guildId = process.env.GUILD_ID;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const commands = [];
-const foldersPath = path.join(__dirname, './commands');
-const commandFolders = fs.readdirSync(foldersPath);
+const foldersPath = join(__dirname, './commands');
+const commandFolders = readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
-	const commandsPath = path.join(foldersPath, folder);
-	const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith('.js'));
+	const commandsPath = join(foldersPath, folder);
+	const commandFiles = readdirSync(commandsPath).filter((file) => file.endsWith('.js'));
 	for (const file of commandFiles) {
-		const filePath = path.join(commandsPath, file);
-		const command = require(filePath);
+		const filePath = join(commandsPath, file);
+
+		const commandModule = await import(`file://${filePath}`);
+		const command = commandModule.default ?? commandModule;
 		if ('data' in command && 'execute' in command) {
 			commands.push(command.data.toJSON());
 		} else {
@@ -30,8 +38,12 @@ const rest = new REST().setToken(token);
 (async () => {
 	try {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
-
-		const data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands });
+		let data;
+		if (provess.env.NODE_ENV === 'production') {
+			data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands });
+		} else {
+			data = await rest.put(Routes.applicationCommands(clientId), { body: commands });
+		}
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	} catch (error) {
