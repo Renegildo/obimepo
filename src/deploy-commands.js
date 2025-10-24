@@ -39,7 +39,7 @@ const rest = new REST().setToken(token);
 	try {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 		let data;
-		if (provess.env.NODE_ENV === 'production') {
+		if (process.env.NODE_ENV === 'production') {
 			data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands });
 		} else {
 			data = await rest.put(Routes.applicationCommands(clientId), { body: commands });
