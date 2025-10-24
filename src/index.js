@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import initDb from './db/init.js';
 import dotenv from 'dotenv';
 import path from 'path';
+import http from 'http';
 dotenv.config();
 
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
@@ -58,3 +59,11 @@ for (const file of eventFiles) {
 await initDb();
 
 client.login(token);
+const port = process.env.PORT ?? 8080;
+
+http.createServer((_, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Servidor rodando.\n');
+}).listen(port, () => {
+  console.log(`Servidor HTTP rodando na porta ${port}`);
+});
