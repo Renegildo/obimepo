@@ -11,4 +11,4 @@ npm run deploy-commands
 And after that, run the bot with
 ```
 npm start
-``
+```
