@@ -9,8 +9,8 @@ O formato deve conter **ano**, **nível (n)**, **fase (f)** e **questão (q)** �
 
 ### Exemplos válidos
 - \`2021n3f2q3\` 
-- \`2019f3n2q1\` 
-- \`2005q3f2n6\`
+- \`2019f2n2q1\` 
+- \`2005q3f2n2\`
 
 ### Exemplos inválidos
 - \`n3f2q32021\` (ano não está no início)
