@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, AttachmentBuilder, EmbedBuilder } from 'discord.js';
-import { inputToImageUrl } from '../../functions.js';
+import { QuestionParser } from '../../../domain/questions/questionParser.js';
 
 export const data = new SlashCommandBuilder()
     .setName('get')
@@ -14,7 +14,7 @@ export async function execute(interaction) {
 
     let imageUrl;
     try {
-        imageUrl = inputToImageUrl(input);
+        imageUrl = QuestionParser.inputToImageUrl(input);
     } catch (error) {
         return await interaction.reply({ content: error.message });
     }

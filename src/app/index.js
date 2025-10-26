@@ -1,6 +1,6 @@
 import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import initDb from './db/init.js';
+import initDb from '../db/init.js';
 import dotenv from 'dotenv';
 import path from 'path';
 import http from 'http';
@@ -21,7 +21,7 @@ client.commands = new Collection();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const foldersPath = join(__dirname, 'commands');
+const foldersPath = join(__dirname, '../discord/commands');
 const commandFolders = readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
@@ -41,7 +41,7 @@ for (const folder of commandFolders) {
 	}
 }
 
-const eventsPath = join(__dirname, './events');
+const eventsPath = join(__dirname, '../discord/events');
 const eventFiles = readdirSync(eventsPath).filter((file) => file.endsWith('.js'));
 for (const file of eventFiles) {
 	const filePath = join(eventsPath, file);
@@ -56,14 +56,21 @@ for (const file of eventFiles) {
 	}
 }
 
+if (process.env.NODE_ENV === 'production') {
+	console.log(`Running on production mode.`);
+} else {
+	console.log('Running on development mode.');
+}
+
 await initDb();
 
 client.login(token);
+
 const port = process.env.PORT ?? 8080;
 
 http.createServer((_, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Servidor rodando.\n');
+	res.writeHead(200, { 'Content-Type': 'text/plain' });
+  	res.end('Server running.\n');
 }).listen(port, () => {
-  console.log(`Servidor HTTP rodando na porta ${port}`);
+  	console.log(`HTTP server running on port ${port}.`);
 });

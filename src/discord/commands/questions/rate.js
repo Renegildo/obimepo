@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js';
-import db from '../../db/index.js';
-import { isValidQuestion, parseQuestion } from '../../functions.js';
+import db from '../../../db/index.js';
+import { QuestionParser } from '../../../domain/questions/questionParser.js';
 
 export const data = new SlashCommandBuilder()
     .setName('avaliar')
@@ -26,13 +26,13 @@ export async function execute(interaction) {
         return await interaction.reply('Dificuldade inválida. Insira uma dificuldade de 1 a 5.');
     }
 
-    if (!isValidQuestion(question)) {
+    if (!QuestionParser.isValid(question)) {
         return await interaction.reply('Questão inválida. Verifique os dados e tente novamente.');
     }
 
     await interaction.reply(`Questão avaliada com dificuldade ${difficulty} com sucesso. Obrigado pela contribuição!`);
 
-    const parsed = parseQuestion(question);
+    const parsed = QuestionParser.parseQuestion(question);
 
     try {
         await db.query(`

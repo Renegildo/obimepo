@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "deploy-commands": "node src/deploy-commands"
+    "start": "node src/app/index.js",
+    "deploy-commands": "node src/app/deployCommands.js"
   },
   "keywords": [],
   "author": "",

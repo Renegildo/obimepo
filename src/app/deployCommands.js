@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const commands = [];
-const foldersPath = join(__dirname, './commands');
+const foldersPath = join(__dirname, '../discord/commands');
 const commandFolders = readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
@@ -40,8 +40,10 @@ const rest = new REST().setToken(token);
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 		let data;
 		if (process.env.NODE_ENV === 'production') {
+			console.log('Updating global commands.');
 			data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands });
 		} else {
+			console.log('Updating guild commands.');
 			data = await rest.put(Routes.applicationCommands(clientId), { body: commands });
 		}
 
