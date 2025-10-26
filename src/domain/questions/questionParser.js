@@ -29,21 +29,21 @@ export class QuestionParser {
     static inputToImageUrl(input) {
         const imageUrlBase = 'https://renegildo.github.io/obmep-questions/questions/';
         const base = input.replace(/-/g, '');
+        const defaultFMatch = '2';
 
-        const fMatch = base.match(/f(\d)/i);
-        const nMatch = base.match(/n(\d)/i);
-        const qMatch = base.match(/q(\d)/i);
-        const yMatch = base.match(/(\d{4})/);
+        const fMatch = base.match(/f(\d)/i) ?? defaultFMatch;
+        const nMatch = base.match(/n(\d)/i)[1];
+        const qMatch = base.match(/q(\d)/i)[1];
+        const yMatch = base.match(/(\d{4})/)[1];
 
-        if (!fMatch) throw new Error('ERRO: Falta a fase.');
         if (!nMatch) throw new Error('ERRO: Falta o nível.');
         if (!qMatch) throw new Error('ERRO: Falta a questão.');
         if (!yMatch) throw new Error('ERRO: Falta o ano.');
 
-        const phase = Number(fMatch[1]);
-        const year = Number(yMatch[1]);
-        const level = Number(nMatch[1]);
-        const question = Number(qMatch[1]);
+        const phase = Number(fMatch);
+        const year = Number(yMatch);
+        const level = Number(nMatch);
+        const question = Number(qMatch);
 
         if (phase > 2 || phase < 1) throw new Error(`ERRO: Não existe a fase ${phase} na OBMEP.`)
         if (phase == 1) throw new Error('ERRO: Somente as questões da **segunda fase** estão disponíveis.')
@@ -51,7 +51,7 @@ export class QuestionParser {
         if (level > 3 || level < 1) throw new Error(`ERRO: O nível ${level} não existe na OBMEP.`);
         if (question > 6 || question < 1) throw new Error(`ERROR: Não existe questão de número ${question}.`)
 
-        const imagePath = `${yMatch[1]}n${nMatch[1]}f${fMatch[1]}q${qMatch[1]}.png`;
+        const imagePath = `${yMatch}n${nMatch}f${fMatch}q${qMatch}.png`;
         const result = imageUrlBase + imagePath;
         return result;
     }
