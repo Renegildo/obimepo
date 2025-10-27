@@ -32,9 +32,9 @@ export class QuestionParser {
         const defaultFMatch = '2';
 
         const fMatch = base.match(/f(\d)/i)?.[1] ?? defaultFMatch;
-        const nMatch = base.match(/n(\d)/i)[1];
-        const qMatch = base.match(/q(\d)/i)[1];
-        const yMatch = base.match(/(\d{4})/)[1];
+        const nMatch = base.match(/n(\d)/i)?.[1];
+        const qMatch = base.match(/q(\d)/i)?.[1];
+        const yMatch = base.match(/(\d{4})/)?.[1];
 
         if (!nMatch) throw new Error('ERRO: Falta o nível.');
         if (!qMatch) throw new Error('ERRO: Falta a questão.');
