@@ -68,9 +68,12 @@ client.login(token);
 
 const port = process.env.PORT ?? 8080;
 
+if (process.env.NODE_ENV == 'production') {
+
 http.createServer((_, res) => {
 	res.writeHead(200, { 'Content-Type': 'text/plain' });
   	res.end('Server running.\n');
 }).listen(port, () => {
   	console.log(`HTTP server running on port ${port}.`);
 });
+}
