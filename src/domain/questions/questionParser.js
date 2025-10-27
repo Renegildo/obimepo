@@ -31,7 +31,7 @@ export class QuestionParser {
         const base = input.replace(/-/g, '');
         const defaultFMatch = '2';
 
-        const fMatch = base.match(/f(\d)/i)[1] ?? defaultFMatch;
+        const fMatch = base.match(/f(\d)/i)?.[1] ?? defaultFMatch;
         const nMatch = base.match(/n(\d)/i)[1];
         const qMatch = base.match(/q(\d)/i)[1];
         const yMatch = base.match(/(\d{4})/)[1];
