@@ -41,10 +41,10 @@ const rest = new REST().setToken(token);
 		let data;
 		if (process.env.NODE_ENV === 'production') {
 			console.log('Updating global commands.');
-			data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands });
+			data = await rest.put(Routes.applicationCommands(clientId), { body: commands });
 		} else {
 			console.log('Updating guild commands.');
-			data = await rest.put(Routes.applicationCommands(clientId), { body: commands });
+			data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands });
 		}
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
