@@ -1,6 +1,6 @@
 # Instructions to run
 ```
-git clone github.com/renegildo/obimepo
+git clone https://github.com/renegildo/obimepo
 ```
 
 After cloning the repository, create an `.env` file with the appropriate contents, as shown in `.env.example`.
