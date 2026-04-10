@@ -27,7 +27,7 @@ export class QuestionParser {
     }
 
     static inputToImageUrl(input) {
-        const imageUrlBase = 'https://renegildo.github.io/obmep-questions/questions/';
+        const imageUrlBase = 'https://renegildo.github.io/obimepo-cdn/obmep/';
         const base = input.replace(/-/g, '');
         const defaultFMatch = '2';
 
