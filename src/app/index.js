@@ -64,7 +64,7 @@ if (process.env.NODE_ENV === 'production') {
 
 await initDb();
 
-client.login(token);
+await client.login(token);
 
 const port = process.env.PORT ?? 8080;
 
