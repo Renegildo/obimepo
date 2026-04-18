@@ -47,7 +47,7 @@ export class QuestionParser {
 
         if (phase > 2 || phase < 1) throw new Error(`ERRO: Não existe a fase ${phase} na OBMEP.`)
         if (phase == 1) throw new Error('ERRO: Somente as questões da **segunda fase** estão disponíveis.')
-        if (year < 2005 || year == 2020 || year > 2024) throw new Error(`ERRO: Não existe OBMEP do ano ${year}.`);
+        if (year < 2005 || year == 2020 || year > 2025) throw new Error(`ERRO: Não existe OBMEP do ano ${year}.`);
         if (level > 3 || level < 1) throw new Error(`ERRO: O nível ${level} não existe na OBMEP.`);
         if (question > 6 || question < 1) throw new Error(`ERROR: Não existe questão de número ${question}.`)
 
