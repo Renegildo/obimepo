@@ -16,6 +16,10 @@ const client = new Client({ intents: [
 	GatewayIntentBits.MessageContent,
 ] });
 
+client.on("debug", console.log);
+client.on("warn", console.log);
+client.on("error", console.log);
+
 client.commands = new Collection();
 
 const __filename = fileURLToPath(import.meta.url);
